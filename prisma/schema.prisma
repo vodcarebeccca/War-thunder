@@ -1,0 +1,53 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Product {
+  id          String      @id @default(cuid())
+  slug        String      @unique
+  titleId     String
+  titleEn     String
+  description String
+  category    Category
+  nation      String?
+  level       Int?
+  rank        Int?
+  priceIdr    Int
+  imageUrl    String?
+  active      Boolean     @default(true)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  stock       StockItem[]
+}
+
+model StockItem {
+  id         String      @id @default(cuid())
+  productId  String
+  product    Product     @relation(fields: [productId], references: [id], onDelete: Cascade)
+  credential String
+  status     StockStatus @default(AVAILABLE)
+  createdAt  DateTime    @default(now())
+
+  @@unique([productId, credential])
+  @@index([productId, status])
+}
+
+enum Category {
+  LEVEL
+  RANK
+  VEHICLE
+  PREMIUM
+  GIFT
+}
+
+enum StockStatus {
+  AVAILABLE
+  RESERVED
+  SOLD
+  INVALID
+}
