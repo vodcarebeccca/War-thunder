@@ -1,6 +1,17 @@
 # WT Market
 
-Rebuilt as a clean Next.js App Router storefront, using React, TypeScript, Tailwind CSS v4, and a Prisma PostgreSQL schema for the future commerce layer.
+Modular Next.js storefront for WT Market, rebuilt to match the original dark neon visual direction.
+
+## Stack
+
+Next.js App Router, React, TypeScript, Tailwind CSS v4, Prisma schema, PostgreSQL-ready, Vercel-ready.
+
+## Structure
+
+- `app/`: route and global styles
+- `components/`: small UI components grouped by feature
+- `data/`: typed catalog data
+- `prisma/`: database schema for the next backend phase
 
 ## Run locally
 
@@ -9,19 +20,10 @@ npm install
 npm run dev
 ```
 
-Open http://localhost:3000.
+Open `http://localhost:3000`. The storefront preview does not require a database yet, so it will not fail when `DATABASE_URL` is missing.
 
-## Deploy to Vercel
+## Deploy
 
-Import this repo. The preview storefront does not query Prisma at runtime, so it builds without a database connection. Add `DATABASE_URL` later when the admin, stock, and payment layer is connected.
+Import this repo into Vercel. Build command is `next build`, no environment variable is required for the static storefront preview. Add `DATABASE_URL` later when enabling Prisma-backed products, stock, orders, and payments.
 
-## Structure
-
-- `src/app`: routes and layouts
-- `src/components`: small UI components
-- `src/data`: demo catalog data
-- `src/lib`: formatting and shared utilities
-- `src/types`: domain types
-- `prisma/schema.prisma`: PostgreSQL data model
-
-The site is independent and not affiliated with Gaijin. Verify marketplace and payment-provider terms before enabling sales.
+The website is independent and not affiliated with Gaijin. Selling or transferring game accounts may violate the game's terms of service.

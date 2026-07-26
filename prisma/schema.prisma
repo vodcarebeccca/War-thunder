@@ -1,53 +1,7 @@
-generator client {
-  provider = "prisma-client-js"
-}
+generator client { provider = "prisma-client-js" }
 
-datasource db {
-  provider = "postgresql"
-  url      = env("DATABASE_URL")
-}
+datasource db { provider = "postgresql" url = env("DATABASE_URL") }
 
-model Product {
-  id          String      @id @default(cuid())
-  slug        String      @unique
-  titleId     String
-  titleEn     String
-  description String
-  category    Category
-  nation      String?
-  level       Int?
-  rank        Int?
-  priceIdr    Int
-  imageUrl    String?
-  active      Boolean     @default(true)
-  createdAt   DateTime    @default(now())
-  updatedAt   DateTime    @updatedAt
-  stock       StockItem[]
-}
-
-model StockItem {
-  id         String      @id @default(cuid())
-  productId  String
-  product    Product     @relation(fields: [productId], references: [id], onDelete: Cascade)
-  credential String
-  status     StockStatus @default(AVAILABLE)
-  createdAt  DateTime    @default(now())
-
-  @@unique([productId, credential])
-  @@index([productId, status])
-}
-
-enum Category {
-  LEVEL
-  RANK
-  VEHICLE
-  PREMIUM
-  GIFT
-}
-
-enum StockStatus {
-  AVAILABLE
-  RESERVED
-  SOLD
-  INVALID
-}
+model Product { id String @id @default(cuid()) slug String @unique title String category String nation String? priceIdr Int isActive Boolean @default(true) createdAt DateTime @default(now()) }
+model StockItem { id String @id @default(cuid()) productId String credential String status String @default("AVAILABLE") createdAt DateTime @default(now()) product Product @relation(fields:[productId],references:[id]) @@index([productId,status]) }
+model Order { id String @id @default(cuid()) code String @unique accessToken String @unique status String @default("PENDING") totalIdr Int createdAt DateTime @default(now()) }

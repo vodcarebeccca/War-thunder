@@ -1,0 +1,1 @@
+export function Footer(){return <footer id="legal" className="mt-16 flex flex-col justify-between gap-3 border-t border-zinc-800 py-6 text-xs text-zinc-400 sm:flex-row"><strong className="text-zinc-200">WT Market</strong><span>Bukan afiliasi Gaijin. Jual-beli akun dapat melanggar ToS War Thunder.</span><span>© 2026</span></footer>}

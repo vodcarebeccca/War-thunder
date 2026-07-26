@@ -1,0 +1,2 @@
+const features=[["Pilihan terkurasi","Akun dengan detail level, rank, nation, dan kategori yang transparan."],["Instant delivery","Kredensial dikirim otomatis setelah pembayaran terkonfirmasi."],["Harga transparan","IDR sebagai harga utama, lengkap dengan ekuivalen USD."]];
+export function FeatureGrid(){return <section className="my-8 grid gap-4 sm:grid-cols-3">{features.map(([title,desc])=><article key={title} className="card glow-card p-5"><h2 className="font-semibold text-amber-400">{title}</h2><p className="mt-2 text-sm text-zinc-400">{desc}</p></article>)}</section>}
